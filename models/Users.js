@@ -22,7 +22,24 @@ const userSchema = new mongoose.Schema ({
     isAdmin: {
         type: Boolean,
         default: false
-    }
+    },
+    orders: [
+        {
+            userId: {
+                type: String,
+                required: [true, `userId is required`]
+            },
+            productId: {
+                type: String,
+                required: [true, `userId is required`]
+            },
+            totalAmount: {
+                type: Number,
+                required: [true, `Total amount is required`]
+            }
+           
+        }
+    ]
 })
 
 
