@@ -13,7 +13,7 @@ module.exports.createOrder = async (data) => {
     let price = await Product.findById(productId).then(result => {
         return result.price
     })
-    console.log("price", price)
+    //console.log("price", price)
     
     const newOrder = new Order({
         userId: userId,
@@ -34,7 +34,7 @@ module.exports.createOrder = async (data) => {
 	// 		}
 	// 	}
 	// })
-        console.log("result", result)
+        //console.log("result", result)
       
         result.orders.push({userId: userId, productId: productId, totalAmount: price})
         return result.save()

@@ -15,7 +15,7 @@ router.post('/create', async (req, res) => {
         productId: req.body.productId,
 
     }
-    //console.log("data",data)
+    console.log("data",data)
     try {
         await createOrder(data).then(result => res.send (result))
     }catch (err) {
