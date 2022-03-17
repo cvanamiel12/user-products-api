@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const {verify, decode, verifyAdmin} = require('./../auth');
 
 const {
-    createOrder
+    createOrder,
+    getAllOrders,
+    getAnOrder
 
 } = require ('./../controllers/orderControllers')
 
@@ -27,18 +30,28 @@ router.post('/create', async (req, res) => {
 
 
 
+//retrieve all orders (admin only)
+router.get('/', verify, async (req, res) => {
+    try {
+        await getAllOrders().then(result => res.send(result))
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+
+
 
 //retrieve authenticated user's orders
+router.get('/:orderId', async (req, res) => {
 
-
-
-
-
-//retrieve all orders (admin only)
-
-
-
-
+//console.log(req.params.orderId)
+    try {
+        await getAnOrder(req.params.orderId).then(result => res.send (result))
+    } catch(err){
+        res.status(500).json(err)
+    }
+})
 
 
 

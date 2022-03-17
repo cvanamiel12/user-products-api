@@ -43,3 +43,24 @@ module.exports.createOrder = async (data) => {
 
 
 }
+
+
+//get all orders
+module.exports.getAllOrders = async () => {
+    return await Order.find().then(result => result)
+}
+
+//retrieve authenticated user's orders
+module.exports.getAnOrder = async () => {
+    return await Order.findById(id).then((result, err) => {
+        if (result) {
+            return result
+        } else {
+            if (result == null) {
+                return {message: `Order not found`}
+            } else {
+                return err
+            }
+        }
+    })
+}
