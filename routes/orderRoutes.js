@@ -18,7 +18,7 @@ router.post('/create', async (req, res) => {
         productId: req.body.productId,
 
     }
-    console.log("data",data)
+    //console.log("data",data)
     try {
         await createOrder(data).then(result => res.send (result))
     }catch (err) {
@@ -46,11 +46,14 @@ router.get('/', verify, async (req, res) => {
 router.get('/:orderId', async (req, res) => {
 
 //console.log(req.params.orderId)
-    try {
-        await getAnOrder(req.params.orderId).then(result => res.send (result))
-    } catch(err){
-        res.status(500).json(err)
-    }
+
+try {
+    await getAnOrder(req.params.orderId).then(result => res.send (result))
+    //console.log(result)
+
+} catch(err){
+    res.status(500).json(err)
+}
 })
 
 

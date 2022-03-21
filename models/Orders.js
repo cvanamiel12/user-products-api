@@ -17,24 +17,24 @@ const orderSchema = new mongoose.Schema ({
     productId: {
         type: String,
         required: [true, `Product ID is required`]
-    },
-    orders: [
-        {
-            userId: {
-                type: String,
-                required: [true, `userId is required`]
-            },
-            productId: {
-                type: String,
-                required: [true, `userId is required`]
-            },
-            totalAmount: {
-                type: Number,
-                required: [true, `Total amount is required`]
-            }
+    }
+    // orders: [
+    //     {
+    //         userId: {
+    //             type: String,
+    //             required: [true, `userId is required`]
+    //         },
+    //         productId: {
+    //             type: String,
+    //             required: [true, `userId is required`]
+    //         },
+    //         totalAmount: {
+    //             type: Number,
+    //             required: [true, `Total amount is required`]
+    //         }
            
-        }
-    ]
+    //     }
+    // ]
     // transactions:[{
     //     productId: {
     //         type: String,

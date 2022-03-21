@@ -36,9 +36,10 @@ module.exports.createOrder = async (data) => {
 	// })
         //console.log("result", result)
       
-        result.orders.push({userId: userId, productId: productId, totalAmount: price})
+        result.order.push({userId: userId, productId: productId, totalAmount: price})
         return result.save()
-        .then(order => order ? `Order added` : false)
+        .then(result => result ? `Order added` : false)
+        
     })
 
 
@@ -50,16 +51,22 @@ module.exports.getAllOrders = async () => {
     return await Order.find().then(result => result)
 }
 
+
 //retrieve authenticated user's orders
-module.exports.getAnOrder = async () => {
-    return await Order.findById(id).then((result, err) => {
+module.exports.getAnOrder = async (reqBody) => {
+    return await Order.findById(reqBody).then((result, err) => {
+        //console.log("resultOne", result)
+        //console.log(err)
         if (result) {
+            
             return result
+            
         } else {
             if (result == null) {
                 return {message: `Order not found`}
             } else {
                 return err
+                
             }
         }
     })
