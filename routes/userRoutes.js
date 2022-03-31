@@ -7,7 +7,9 @@ const {
     getAllUsers,
     register,
     login,
-    adminStatus
+    adminStatus,
+    profile,
+    checkEmail
 
 
 } = require('./../controllers/userControllers')
@@ -24,6 +26,16 @@ router.get('/', async (req, res) => {
         res.status(500).json(err)
     }
 
+})
+
+//CHECK IF EMAIL ALREADY EXISTS
+router.post('/email-exists', async (req, res) => {
+	try{
+		await checkEmail(req.body).then(result => res.send(result))
+
+	}catch(error){
+		res.status(500).json(error)
+	}
 })
 
 
@@ -60,6 +72,19 @@ router.patch('/isAdmin', verifyAdmin, async (req, res) => {
 
 })
 
+//RETRIEVE USER INFORMATION
+router.get('/profile', verify, async (req, res) => {
+	console.log(req.headers.authorization)
+	const userId = decode(req.headers.authorization).id
+	console.log(userId)
+
+	try{
+		profile(userId).then(result => res.send(result))
+
+	}catch(err){
+		res.status(500).json(err)
+	}
+})
 
 
 

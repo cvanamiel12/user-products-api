@@ -26,14 +26,7 @@ module.exports.createOrder = async (data) => {
     // return result
     
     return await newOrder.save().then ((result, err) => result ? `Order added` : false)
-	// 	if(result){
-	// 		return true
-	// 	} else {
-	// 		if(result == null){
-	// 			return false
-	// 		}
-	// 	}
-	// })
+	
         //console.log("result", result)
       
         //result.order.push({userId: userId, productId: productId, totalAmount: price})
@@ -41,8 +34,6 @@ module.exports.createOrder = async (data) => {
        
         //.then(result => result ? `Order added` : false)
        
-    
-
 
 }
 

@@ -11,7 +11,22 @@ module.exports.getAllUsers = async () => {
     return await User.find().then(result => result)
 }
 
+//CHECK IF EMAIL EXISTS
+module.exports.checkEmail = async (reqBody) => {
+	const {email} = reqBody
 
+	return await User.findOne({email: email}).then((result, err) =>{
+		if(result){
+			return true
+		} else {
+			if(result == null){
+				return false
+			} else {
+				return err
+			}
+		}
+	})
+}
 
 //register a user
 module.exports.register = async(reqBody) => {
@@ -69,4 +84,21 @@ module.exports.adminStatus = async (reqBody) => {
 	const {email} = reqBody
 
 	return await User.findOneAndUpdate({email: email}, {$set: {isAdmin: true}}, {new:true}).then((result, err) => result ? true : err)
+}
+
+
+//RETRIEVE USER INFORMATION
+module.exports.profile = async (id) => {
+
+	return await User.findById(id).then((result, err) => {
+		if(result){
+			return result
+		}else{
+			if(result == null){
+				return {message: `user does not exist`}
+			} else {
+				return err
+			}
+		}
+	})
 }
