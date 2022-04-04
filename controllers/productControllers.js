@@ -42,3 +42,16 @@ module.exports.unarchiveProduct = async (productId) => {
 
     return await Product.findByIdAndUpdate(productId, {$set: {isOffered: true}}, {new:true}).then(result => result)
 }
+
+
+//isOffered
+module.exports.activeProducts = async () => {
+
+	return await Product.find({isOffered:true}).then(result => result)
+}
+
+//delete
+module.exports.deleteProduct = async (productId) => {
+
+	return await Product.findByIdAndDelete(productId).then((result, err) => result ? true : err)
+}

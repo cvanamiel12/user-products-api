@@ -6,7 +6,9 @@ const {
     create,
     updateProduct,
     archiveProduct,
-    unarchiveProduct
+    unarchiveProduct,
+    activeProducts,
+    deleteProduct
 
 
 } = require('./../controllers/productControllers')
@@ -29,6 +31,15 @@ router.get('/', verify, async (req, res) => {
 //get a single product 
 
 
+//isOffered
+router.get('/isOffered', verify, async (req, res) => {
+	try{
+		await activeProducts().then(result => res.send(result))
+
+	}catch(err){
+		res.status(500).json(err)
+	}
+})
 
 
 
@@ -81,6 +92,15 @@ router.patch('/:productId/unarchive', verifyAdmin, async (req, res) => {
     }
 })
 
+//delete
+router.delete('/:productId/delete-product', verifyAdmin, async (req, res) => {
+	try{
+		await deleteProduct(req.params.productId).then(result => res.send(result))
+
+	}catch(err){
+		res.status(500).json(err)
+	}
+})
 
 
 
