@@ -8,7 +8,8 @@ const {
     archiveProduct,
     unarchiveProduct,
     activeProducts,
-    deleteProduct
+    deleteProduct,
+    getAProduct
 
 
 } = require('./../controllers/productControllers')
@@ -43,7 +44,7 @@ router.get('/isOffered', verify, async (req, res) => {
 
 
 
-//crete a product (admin only)
+//create a product (admin only)
 router.post('/create', verifyAdmin, async (req, res) => {
     try {
         create(req.body).then(result => res.send(result))
@@ -53,6 +54,16 @@ router.post('/create', verifyAdmin, async (req, res) => {
 })
 
 
+//retrieve one product
+router.get('/:productId', verify, async (req, res) =>
+{
+    try{
+        await getAProduct(req.params.productId).then(result => res.send(result))
+    } catch(err) {
+        res.status(500).json(err)
+    }
+}
+)
 
 
 

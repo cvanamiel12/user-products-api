@@ -24,6 +24,23 @@ let newProduct = new Product ({
 
 }
 
+//retrieve a product
+module.exports.getAProduct = async(id) => {
+   
+    return await Product.findById(id).then((result, err) => {
+        if (result){
+            return result
+        } else {
+            if (result == null) {
+                return {message: 'Product not found'}
+            } else {
+                return err
+            }
+        }
+    })
+}
+
+
 
 //update product info (admin only)
 module.exports.updateProduct = async (productId, reqBody) => {
